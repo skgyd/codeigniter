@@ -36,8 +36,10 @@ class Topic extends CI_Controller {
         $this->form_validation->set_rules('description','본문','required');
         if($this->form_validation->run() == FALSE){ //사용자 입력값 유효성 검증
             $this->load->view('add');
-        }else{
-            echo "success"; //set_rules 조건 수행 시
+        }else{  //set_rules 조건 수행 시
+            $topic_id = $this->topic_model->add($this->input->post('title'),$this->input->post('description'));
+            $this->load->helper('url');
+            redirect('topic/get/'.$topic_id);
         }
         $this->load->view('footer');
     }
