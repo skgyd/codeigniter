@@ -2,7 +2,10 @@
     <article>
         <h1><?=$topic->title?></h1>
         <div>
-            <?=$topic->description?>
+            <!-- helper kdate() -->
+            <div><?=kdate($topic->created)?></div>
+            <!-- helper auto_link() -->
+            <?=auto_link($topic->description)?> 
         </div>
     </article>
 </div>

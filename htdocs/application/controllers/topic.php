@@ -25,6 +25,7 @@ class Topic extends CI_Controller {
         // $data=array('id'=>$id);
         // $this->load->view('main',$data);
         //$this->load->view('topic_list',array('topics'=>$topics));
+        $this->load->helper(array('url', 'HTML', 'korean'));  //helper
         $this->load->view('get',array('topic'=>$topic));
         $this->load->view('footer');
     }
