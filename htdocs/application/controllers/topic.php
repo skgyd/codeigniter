@@ -7,8 +7,10 @@ class Topic extends CI_Controller {
         $this->load->database();
         $this->load->model('topic_model');
         $topics=$this->topic_model->gets();
-        $this->load->view('topic_list',array('topics'=>$topics));
+        $this->load->config('opentutorials');
         $this->load->view('head');
+        $this->load->view('topic_list',array('topics'=>$topics));
+        
     }
 	public function index()
 	{
