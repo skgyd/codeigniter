@@ -34,6 +34,14 @@ class Topic extends CI_Controller {
     }
 
     function add(){
+        //로그인 필요
+        if( ! $this->session->userdata('is_login')){
+            $this->load->helper('url');
+            redirect('/auth/login');
+        }
+        //로그인이 되어있지 않다면 로그인 페이지로 리다이렉션
+
+
         $this->load->library('form_validation');
         $this->form_validation->set_rules('title','제목','required');
         $this->form_validation->set_rules('description','본문','required');
@@ -42,7 +50,7 @@ class Topic extends CI_Controller {
         }else{  //set_rules 조건 수행 시
             $topic_id = $this->topic_model->add($this->input->post('title'),$this->input->post('description'));
             $this->load->helper('url');
-            redirect('topic/get/'.$topic_id);
+            redirect('/topic/get/'.$topic_id);
         }
         $this->load->view('footer');
     }
@@ -55,7 +63,7 @@ class Topic extends CI_Controller {
         $config['max_height']='768';
         $this->load->library('upload',$config);
 
-        if( ! $this->upload->do_upload("user_upload_file")){  //!=거짓
+        if( ! $this->upload->do_upload("user_upload_file")){ 
             $error=array('error'=>$this->upload->display_errors());
             echo $this->upload->display_errors();
         } else{
