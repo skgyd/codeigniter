@@ -28,17 +28,19 @@ class Auth extends MY_Controller{
             echo "failed";
             $this->load->view('join');
         } else{
+            //encryption -bcrypt
+            if(function_exists('password_hash')){
+                $this->load->helper('password');
+            }
+            $hash = password_hash($this->input->post('password'),PASSWORD_BCRYPT);
             //add DB
             $this->load->model('user_model');
             $this->user_model->add(array(
                 'email'=>$this->input->post('email'),
-                'password'=>$this->input->post('password'),
+                'password'=>$hash,
                 'nickname'=>$this->input->post('nickname'),
             ));
-            
-            //encryption -bcrypt
-            
-            
+            $this->session->set_flashdata('message','회원가입에 성공하였습니다.');
             $this->load->helper('url');
             redirect("topic");
         }
