@@ -14,7 +14,7 @@ class Auth extends MY_Controller{
     function logout(){
         $this->session->sess_destroy();
         $this->load->helper('url');
-        redircet("/topic");
+        redirect("topic");
     }
 
     function authentication(){
@@ -31,9 +31,5 @@ class Auth extends MY_Controller{
             $this->load->helper('url');
             redirect('auth/login'); 
         }
-    }
-
-    function _head(){
-        
     }
 }
