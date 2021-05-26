@@ -25,10 +25,22 @@ class Auth extends MY_Controller{
         $this->form_validation->set_rules('password','비밀번호','required|min_length[6]|max_length[30]|matches[re_password]');
         $this->form_validation->set_rules('re_password','비밀번호 확인','required');
         if($this->form_validation->run() === false){
+            echo "failed";
             $this->load->view('join');
         } else{
-            //descryption
             //add DB
+            $this->load->model('user_model');
+            $this->user_model->add(array(
+                'email'=>$this->input->post('email'),
+                'password'=>$this->input->post('password'),
+                'nickname'=>$this->input->post('nickname'),
+            ));
+            
+            //encryption -bcrypt
+            
+            
+            $this->load->helper('url');
+            redirect("topic");
         }
         $this->_footer();
     }
