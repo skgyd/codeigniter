@@ -1,14 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topic extends CI_Controller {
-    function __construct(){ //생성자. _->url 라우팅 불가
+class Topic extends MY_Controller { //topic->MY_Controller->CI_Controller
+        function __construct(){ //생성자. _->url 라우팅 불가
         parent::__construct();
         $this->load->database();
         $this->load->model('topic_model');
+        $this->_head();
         $topics=$this->topic_model->gets();
-        $this->load->config('opentutorials');
-        $this->load->view('head');
         $this->load->view('topic_list',array('topics'=>$topics));
         
     }
@@ -18,7 +17,7 @@ class Topic extends CI_Controller {
         //$this->load->view('head');
         //$this->load->view('topic_list',array('topics'=>$topics));
 		$this->load->view('main');
-        $this->load->view('footer');
+        $this->_footer();
 	}
 
     public function get($id){
@@ -30,7 +29,7 @@ class Topic extends CI_Controller {
         //$this->load->view('topic_list',array('topics'=>$topics));
         $this->load->helper(array('url', 'HTML', 'korean'));  //helper
         $this->load->view('get',array('topic'=>$topic));
-        $this->load->view('footer');
+        $this->_footer();
     }
 
     function add(){
@@ -52,7 +51,7 @@ class Topic extends CI_Controller {
             $this->load->helper('url');
             redirect('/topic/get/'.$topic_id);
         }
-        $this->load->view('footer');
+        $this->_footer();
     }
     
     function upload_receive(){
@@ -75,6 +74,6 @@ class Topic extends CI_Controller {
 
     function upload_form(){
         $this->load->view('upload_form');
-        $this->load->view('footer');
+        $this->_footer();
     }
 }
