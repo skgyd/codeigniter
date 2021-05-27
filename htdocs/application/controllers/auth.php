@@ -7,7 +7,8 @@ class Auth extends MY_Controller{
     function login(){
         $this->load->config('opentutorials');
         $this->_head();     
-        $this->load->view('login');
+        //$this->load->helper('url'); //autoload에서 선언
+        $this->load->view('login',array('returnURL'=> $this->input->get('returnURL')));
         $this->_footer();
     }
 
@@ -61,8 +62,13 @@ class Auth extends MY_Controller{
         ){
             $this->session->set_userdata('is_login',true);
             //echo $this->user_model->getByNickname(array('nickname'=>$this->input->post('nickname')));
-            $this->load->helper('url');
-            redirect("/topic");
+            //$this->load->helper('url');
+            $returnURL = $this->input->get('returnURL');
+            if($returnURL === ''){
+                $returnURL='topic';  
+            }
+            redirect($returnURL);  
+        
         } else  {
             //echo '로그인 실패';
             $this->session->set_flashdata('message','로그인에 실패하였습니다.'); 
