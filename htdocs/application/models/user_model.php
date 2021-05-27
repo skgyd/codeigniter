@@ -13,5 +13,11 @@ class User_model extends CI_Model{
     }
     function getByEmail($option){
         $result=$this->db->get_where('user',array('email'=>$option['email']))->row();
+        return $result;
     }
+
+    // function getByNickname($option){
+    //     $result=$this->db->get_where('user',array('nickname'=>$option['nickname']))->row();
+    //     return $result;
+    // }
 }

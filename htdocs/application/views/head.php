@@ -49,7 +49,7 @@
                         <div class="nav pull-right">
                             <?php
                             if($this->session->userdata('is_login')){
-                            ?>
+                            ?>  
                                 <li><a href="/index.php/auth/logout">로그아웃</a></li>
                             <?php
                             }else{
