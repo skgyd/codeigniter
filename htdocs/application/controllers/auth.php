@@ -49,13 +49,17 @@ class Auth extends MY_Controller{
 
     function authentication(){
         //var_dump($this->config->item('authentication'));
-        $authentication=$this->config->item('authentication');
-        if($this->input->post('id')==$authentication['id']&&
-        $this->input->post('password')==$authentication['password']){
+        //$authentication=$this->config->item('authentication');
+        $this->load->model('user_model');
+        $user=$this->user_model->getByEmail(array('email'=>$this->input->post('email')));
+        if(
+            $this->input->post('email')==$user->email &&
+            password_verify($this->input->post('password'),$user->password)
+        ){
             $this->session->set_userdata('is_login',true);
             $this->load->helper('url');
-            redirect("/topic/add");
-        } else{
+            redirect("/topic");
+        } else  {
             //echo '로그인 실패';
             $this->session->set_flashdata('message','로그인에 실패하였습니다.'); 
             $this->load->helper('url');

@@ -7,13 +7,13 @@
             <div class="control-group">
                 <label class="control-label" for="inputEmail">아이디</label>
                 <div class="controls">
-                    <input type="text" name="id" placeholder="id">
+                    <input type="text" name="email" placeholder="이메일">
                 </div>
             </div>
             <div class="control-group" style="margin-top: 10px;">
                 <label class="control-label" for="inputPassword">비밀번호</label>
                 <div class="controls">
-                    <input type="password" name="password"  placeholder="password">
+                    <input type="password" name="password"  placeholder="비밀번호">
                 </div>
             </div>
         </div>
